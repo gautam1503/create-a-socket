@@ -1,0 +1,46 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat APP</title>
+</head>
+<body>
+    <h1>Gelloooo</h1>
+    <!-- <button onclick="CreateConnection()">Create WS Connection</button> -->
+
+    <input type="text" id="message" placeholder="Error Message">
+    <div id="messages"></div>
+    <button id="sendBtn">Send</button>
+    <script src="/socket.io/socket.io.js">
+        // it automatically give us a script 
+        
+    </script>
+    <script>
+        //function CreateConnection(){
+            const socket = io();
+            const sendBtn = document.getElementById("sendBtn");
+            const message = document.getElementById("message");
+            const messages = document.getElementById("messages");
+
+
+            //message receive from backend
+            socket.on("message", (message)=>{
+               // console.log(message);
+                const p = document.createElement("p");
+                p.innerHTML = message;
+                messages.append(p);
+              
+
+            });
+
+
+            sendBtn.addEventListener("click",  ()=>{
+                console.log(message.value); 
+                socket.emit("user-message", message.value);
+         });
+       // }
+        // on each refresh it will create a new socket connection
+        </script>
+</body>
+</html>
